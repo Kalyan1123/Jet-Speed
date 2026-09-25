@@ -1,0 +1,134 @@
+Run in this order. One Copilot chat for Steps 1–7, new chat for Step 8. Max 3–4 files per message.
+
+**Master Word doc** (paste every Copilot output here as you go): `Technical_Documentation_v0.1.docx`
+- Part A: Data Operations (model-driven) ← Step 7
+- Part B: Canvas App ← Steps 5, 6
+- Part C: Shared Components ← Steps 2, 3, 4
+
+---
+
+**Step 1: setup**
+Attach: all `.md` files + functional guide.
+```
+You are an expert Power Platform technical writer. We will build admin-only technical documentation for an internal learning platform, step by step.
+
+Platform:
+- Model-driven app "Power Platform Community Administration": admins create/edit/deactivate all data.
+- Canvas app "Power Platform Community Offerings": user-facing UI, 11 screens + 1 ExpandMenu component. Admins change it only for UI.
+- 1 flow called directly from the app (Get Transcript). 6 flows triggered by Dataverse row changes.
+- Separate "Appointment Booking" app handles Power Hour 1:1 bookings.
+
+Attached:
+- .md files: our documentation standard. Follow its structure, headings and rules exactly. If it conflicts with my instructions, the .md wins.
+- Functional guide: end-user guide. Use it only to understand user tasks. Don't copy it; reference as "see Functional Guide, section X".
+
+Rules for every step:
+- Use only names found in attached files/screenshots. Never invent tables, columns, flows, variables.
+- Unclear → [TBD – confirm].
+- Output clean headings + tables, ready to paste into Word.
+
+Don't write documentation yet. Reply with:
+1. Section structure from the .md standard
+2. User tasks from the functional guide, mapped to screens
+Then wait.
+```
+
+**Step 2a: image test**
+Attach: `Tech_01_Tables.docx`
+```
+Test: list every column shown in the first table screenshot.
+```
+Wrong/empty → re-do with PNG files instead of Word.
+
+**Step 2b: tables + choices**
+Attach: `Tech_01_Tables.docx`, `Tech_02_Choices.docx`
+```
+Document all tables.
+Per table:
+1. Display name | Logical name
+2. Purpose (inferred → [TBD – confirm])
+3. Columns: Display name | Logical name | Type | Required | Choice values / Lookup target
+4. Relationships (lookups)
+Then Choices: Choice | Values | Used in (table.column)
+```
+
+**Step 3: config**
+Attach: `Tech_03` to `Tech_06`
+```
+Document:
+1. Environment variables: Name | Type | Current value | Purpose
+2. Connection references: Name | Connector | Used by [TBD if unknown]
+3. Security roles: Role | Table | Create | Read | Write | Delete | Append | Append To | Scope
+4. Site map: Area > Group > Page | Table opened
+```
+
+**Step 4: flows**
+Attach: `Tech_00_CanvasApp_Overview.docx`, `Tech_08_Flows.docx`
+```
+Document:
+1. Canvas app data sources
+2. Flow inventory: Flow | Trigger type (Power Apps / Dataverse row event / Scheduled) | Table | Change type | Filter / Select columns
+3. Per flow: purpose (inferred from name + trigger → [TBD – confirm]), when it fires, which model-driven edits could fire it
+Internal steps not available yet → write "Steps: [TBD – pending flow definition]".
+```
+
+**Step 5: app + component**
+Attach: `00_App.txt`, `12_Component_ExpandMenu.txt`
+```
+Attached: App.OnStart (Formulas and StartScreen are blank) and ExpandMenu component, used on all screens with different instance names. Document startup logic, global variables/collections, admin/role checks, and the component: purpose, custom properties, navigation behavior.
+```
+
+**Step 6: screens, one per message** (01 → 11)
+Attach: one screen `.txt`
+```
+Screen: <name>. Attached: YAML from View code.
+Use the .md screen template. If none, use:
+1. Purpose
+2. User vs admin differences + formula controlling them
+3. Data sources + columns used
+4. Controls: Name | Type | Purpose | Key formula
+5. Actions: OnSelect / OnVisible / OnChange — data written (Patch / SubmitForm / Remove), flows called (.Run)
+6. Flow chain: which data write lands in a table that triggers a flow from Step 4
+7. Variables & collections
+8. Navigation: from / to
+9. Functional mapping: each user task on this screen → control + formula + table/flow
+10. Data maintenance: which model-driven table feeds this screen
+11. Risks: hardcoded values, delegation
+12. [TBD] items
+```
+
+**Step 7: model-driven**
+Attach: `Tech_07_ModelDriven_FormsViews.docx`
+```
+Per table admins edit:
+1. Site map location: Area > Group > Page
+2. Form fields: Display name | Type | Required | Notes
+3. Views: Name | Columns | Filter
+4. Admin how-to: create, edit, deactivate — step by step
+5. After save: flows triggered (from Step 4) → emails / Teams invites
+6. Where data appears in canvas app: screen + control
+7. [TBD] items
+```
+
+**Step 8: new chat, merge**
+Attach: master doc + `.md` files.
+```
+Attached: draft technical documentation + our .md standard. Add, following the standard:
+1. Overview + architecture
+2. Screen inventory: Name | Purpose | User/Admin
+3. Data sources: Table | Columns | Screens | Read/Write
+4. Trace matrix: Screen | Control | Action | Table written | Flow triggered | Result
+5. Data flow map: Table | Entered in (model-driven form) | Flow triggered | Shown in (canvas screen)
+6. Admin warnings: tables whose edits fire flows
+7. Hardcoded values to move to environment variables
+8. All [TBD] items in one list
+Don't rewrite existing sections.
+```
+
+---
+
+**Watch**
+- Output stops following `.md` structure mid-chat → new chat, re-attach `.md` + Step 1 prompt.
+- Check column names against Step 2 output. Copilot invents.
+
+Want this runbook as a doc to keep open while working?
