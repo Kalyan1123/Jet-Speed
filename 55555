@@ -1,0 +1,7 @@
+For each user task in the functional mapping sections, output a flowchart LR diagram: User → screen → control action → table written → flow triggered → result.
+
+Above each diagram write:
+Task: <task name>
+Paste under: <exact screen section heading from the draft>
+
+One diagram per task.
