@@ -1,0 +1,9 @@
+Tech_00_CanvasApp_Overview.docx     → Data pane + Power Automate pane (Studio left rail)
+Tech_01_Tables.docx                 → column lists, all 20 tables
+Tech_02_Choices.docx                → each choice + its values
+Tech_03_EnvironmentVariables.docx   → name, type, current value
+Tech_04_ConnectionReferences.docx   → name, connector
+Tech_05_SecurityRoles.docx          → each role, Custom Entities tab
+Tech_06_SiteMap.docx                → model-driven navigation
+Tech_07_ModelDriven_FormsViews.docx → main form + views per table admins edit
+Tech_08_Flows.docx                  → later
