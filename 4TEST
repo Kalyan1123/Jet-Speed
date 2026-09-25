@@ -1,0 +1,43 @@
+No redo needed. Master doc already has everything Copilot needs for diagrams. Add diagrams in Step 8, split into 4 messages in the new chat.
+
+**New chat.** Attach: master doc + `.md` files.
+
+**8a: merge**
+```
+Attached: draft technical documentation + our .md standard.
+
+Diagram rule: the .md files contain Mermaid diagrams (graph TD, erDiagram, flowchart LR). When I ask for a diagram, output Mermaid code in a code block, same style. Use only real names from the draft. The .md diagrams may use placeholder names (e.g. RetentionFlow, EnquiryFlow, ATTENDEE); don't reuse them unless they appear in the draft.
+
+Now add, following the standard:
+1. Overview + architecture (text only, diagram comes later)
+2. Screen inventory: Name | Purpose | User/Admin
+3. Data sources: Table | Columns | Screens | Read/Write
+4. Trace matrix: Screen | Control | Action | Table written | Flow triggered | Result
+5. Data flow map: Table | Entered in (model-driven form) | Flow triggered | Shown in (canvas screen)
+6. Admin warnings: tables whose edits fire flows
+7. Hardcoded values to move to environment variables
+8. All [TBD] items in one list
+Don't rewrite existing sections.
+```
+
+**8b: ER diagram**
+```
+Output an erDiagram of all custom tables and their lookup relationships from the draft. Label each relationship.
+```
+→ paste under Tables section.
+
+**8c: architecture diagram**
+```
+Output a graph TD architecture diagram: Admin → model-driven app → Dataverse; User → canvas app → Dataverse / environment variables / SharePoint / Appointment Booking app; Dataverse → each flow (real names) → Outlook / Teams. Include Get Transcript flow called directly from canvas app.
+```
+→ paste under Overview.
+
+**8d: user task flows**
+```
+For each user task in the functional mapping sections, output a flowchart LR diagram: User → screen → control action → table written → flow triggered → result. One diagram per task, titled with the task name.
+```
+→ paste each under its screen section, or wherever the `.md` standard places process flows.
+
+**If output is thin or cut off:** 8d → ask for 3–4 screens at a time. Master doc too big → copy only the relevant Part into a smaller doc and attach that.
+
+Then render the code (colleague's tool) → PNG → insert. Keep code in appendix.
