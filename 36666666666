@@ -1,0 +1,50 @@
+You are a senior Power Apps technical writer. Write maintenance documentation for the canvas app "Power Platform Community Offerings". Readers: admins who must quickly find WHERE to change something and WHAT happens when a user clicks something.
+
+Attached:
+- 13 .txt files: YAML from Power Apps "View code". 00 = App.OnStart, 01–11 = screens, 12 = ExpandMenu component (same on every screen, instance names differ).
+- Screens_Screenshots.docx: screenshot of each screen under a heading with the screen name.
+- Tech_08_Flows.docx: trigger card of each flow, showing the table and change type that fires it.
+
+Flow triggers: Get Transcript is called directly from the app with .Run. The other flows are NOT called from the app; they fire automatically when a table row changes (see Tech_08_Flows.docx). When a screen writes to a table (Patch / SubmitForm / Remove), check if that table fires a flow and link them.
+
+For each screen, use exactly this structure:
+
+## <Screen name>
+**Purpose:** one line.
+**Opened from:** … | **Goes to:** …
+
+### Quick edit guide
+Table: I want to change… | Control | Property
+(e.g. button text, tile description, link, colors, visibility)
+
+### What happens on click
+For each control that DOES something (OnSelect, OnChange, OnVisible, Items, Visible with logic):
+#### <Control name> – <what the user sees, e.g. "Register" button>
+- **Does:** one line
+- **Property:** OnSelect
+```powerfx
+<exact formula from the code>
+```
+- **Data:** reads/writes <Table>
+- **Flow:** <name> (direct .Run, or fires because <Table> row added/modified) → result (email, Teams invite, link returned)
+- Mermaid diagram ONLY if data is written or a flow is involved. Max 5 nodes, flowchart LR, e.g. Register button → Patch Registrations → Registration flow → Confirmation email
+
+### Navigation
+Table: Control | Goes to screen | Passes (variables/context)
+
+### Variables set here
+Only if any. Name | Purpose
+
+### Watch out
+Only real issues: hardcoded URLs/emails/IDs, delegation limits. Skip if none.
+
+Rules:
+- Skip decorative controls (static labels, rectangles, images, icons with no action). Cover their text/images only in the Quick edit guide.
+- Skip default and styling properties unless listed in the Quick edit guide.
+- Formulas copied exactly, never rewritten.
+- Use only names from the code. Unknown → [TBD].
+- No introductions, no summaries, no generic Power Apps explanations, no repeating the YAML.
+- Document the ExpandMenu component once (first reply), not on every screen.
+
+First reply: list the 11 screens and every flow call (.Run) you found, then document App.OnStart and ExpandMenu. Stop.
+After that, one screen per reply, in file order. Wait for me to type "next".
